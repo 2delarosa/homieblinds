@@ -1,7 +1,7 @@
 /**
  * Homie Node for DHT Temperature and Humidity  Sensor
  * 
- */
+ **/
 #include "DHTNode.hpp"
 
 DHTNode::DHTNode(const uint8_t dhtPin, DHTesp::DHT_MODEL_t dhtModel, const char *id, const char *name, const char *nType, const int measurementInterval = MEASUREMENT_INTERVAL)
