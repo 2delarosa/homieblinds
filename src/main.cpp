@@ -36,7 +36,7 @@ extern "C"
 ADC_MODE(ADC_VCC); //vcc read in MetricsNode
 
 MetricsNode metricsNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
-BlindTiltNode BlindTiltNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
+BlindTiltNode blindTiltNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
 
 bool TDbroadcastHandler(const String &level, const String &value)
 {
@@ -54,7 +54,7 @@ void setup()
   Serial << endl << "Starting..." << endl;
 
   metricsNode.setMeasurementInterval(60);
-  BlindTiltNode.setMeasurementInterval(60);
+  blindTiltNode.setMeasurementInterval(60);
 
   Homie_setFirmware(SKN_MOD_NAME, SKN_MOD_VERSION);
   Homie_setBrand(SKN_MOD_BRAND);
