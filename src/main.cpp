@@ -1,9 +1,9 @@
 /**
  * @file main.cpp
- * @author James Scott, Jr.  aka(Skoona) (skoona@gmail.com)
- * @brief HomieNode featuring an DHT (11/22) Temperature sensor.
+ * @author Tony De La Rosa and James Scott, Jr.  aka(Skoona) (skoona@gmail.com)
+ * @brief HomieNode Implementation of Tilt Blind.
  * @version 1.0.0
- * @date 2021-01-31
+ * @date 2021-02-21
  * 
  * @copyright Copyright (c) 2021
  * 
@@ -11,6 +11,7 @@
 
 #include <Arduino.h>
 #include "MetricsNode.hpp"
+#include "BlindTiltNode.hpp"
 
 #ifdef ESP8266
 extern "C"
@@ -35,6 +36,7 @@ extern "C"
 ADC_MODE(ADC_VCC); //vcc read in MetricsNode
 
 MetricsNode metricsNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
+BlindTiltNode BlindTiltNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
 
 bool TDbroadcastHandler(const String &level, const String &value)
 {
@@ -52,6 +54,7 @@ void setup()
   Serial << endl << "Starting..." << endl;
 
   metricsNode.setMeasurementInterval(60);
+  BlindTiltNode.setMeasurementInterval(60);
 
   Homie_setFirmware(SKN_MOD_NAME, SKN_MOD_VERSION);
   Homie_setBrand(SKN_MOD_BRAND);

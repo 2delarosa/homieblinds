@@ -49,6 +49,6 @@ void BlindTiltNode::setup()
 
       setProperty(cPropertyTilt)
           .setRetained(true)
-          .send(String("function lookup"));
+          .send(WiFi.localIP().toString());
     }
   }
