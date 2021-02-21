@@ -21,6 +21,8 @@ void MetricsNode::setup()
   Homie.getLogger() << cCaption
                     << endl;
   Homie.getLogger() << cIndent
+                    << F("IP Address: ")
+                    << WiFi.localIP()
                     << F("RSSI: ")
                     << WiFi.RSSI()
                     << F(" MAC: ")
@@ -48,6 +50,11 @@ void MetricsNode::setup()
       .setName(cPropertySupplyName)
       .setDatatype(cPropertySupplyDataType)
       .setUnit(cPropertySupplyFormat);
+
+  advertise(cPropertyIP)
+      .setName(cPropertyIPName)
+      .setDatatype(cPropertyIPDataType)
+      .setUnit(cPropertyIPFormat);
 }
 
   /**
@@ -60,6 +67,10 @@ void MetricsNode::setup()
       Homie.getLogger() << cIndent 
                         << F("〽 Sending Device Metrics: ") 
                         << getId() 
+                        << endl;
+      Homie.getLogger() << cIndent
+                        << F("IP Address: ")
+                        << WiFi.localIP()
                         << endl;
       Homie.getLogger() << cIndent
                         << F("RSSI: ")
@@ -93,5 +104,10 @@ void MetricsNode::setup()
       setProperty(cPropertySupply)
           .setRetained(true)
           .send(String((ESP.getVcc() / 1000.0)));
+          
+      setProperty(cPropertyIP)
+          .setRetained(true)
+          .send(WiFi.localIP().toString());
     }
   }
+  

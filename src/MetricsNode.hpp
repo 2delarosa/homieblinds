@@ -3,7 +3,7 @@
  * 
  */
 
-#pragma once
+#pragma once  //required
 
 #include <Homie.hpp>
 
@@ -19,7 +19,7 @@ public:
   MetricsNode(const char *id, const char *name, const char *nType, const int measurementInterval = MEASUREMENT_INTERVAL);
   void setMeasurementInterval(unsigned long interval) { _measurementInterval = interval; }
 
-protected : 
+protected : //Not accessible by main.cpp
   void setup() override;
   void loop() override;
   
@@ -41,7 +41,7 @@ private:
 
   const char *cPropertyMac = "mac";
   const char *cPropertyMacName = "Mac Address";
-  const char *cPropertyMacDataType = "sring";
+  const char *cPropertyMacDataType = "string";
   const char *cPropertyMacFormat = "";
 
   const char *cPropertyResetReason = "resetReason";
@@ -53,4 +53,9 @@ private:
   const char *cPropertySupplyName = "3.3V Supply";
   const char *cPropertySupplyDataType = "float";
   const char *cPropertySupplyFormat = "V";
+
+  const char *cPropertyIP = "ipAddress";
+  const char *cPropertyIPName = "IP Address";
+  const char *cPropertyIPDataType = "string";
+  const char *cPropertyIPFormat = "";
 };
