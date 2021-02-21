@@ -25,18 +25,22 @@ extern "C"
  * ex: sknSensors/deviceName/DHT_0/temperature -> 72.3 degress
  * Note: HomieNode(...range,lower,upper) manages this array suffix change; i.e no more name fixups
 */
-#define SKN_MOD_NAME "Monitor-DHT-RCWL-Metrics"
-#define SKN_MOD_VERSION "2.0.0"
-#define SKN_MOD_BRAND "SknSensors"
+#define TD_MOD_NAME "Blind Tilt Operations"
+#define TD_MOD_VERSION "1.0.0"
+#define TD_MOD_BRAND "TDControl"
 
 #define SKN_DNODE_ID "hardware"
 #define SKN_DNODE_TITLE "Device Info"
 #define SKN_DNODE_TYPE "sensor"
 
+#define TD_BNODE_ID "hardware"
+#define TD_BNODE_TITLE "Blind Tilt Control"
+#define TD_BNODE_TYPE "operations"
+
 ADC_MODE(ADC_VCC); //vcc read in MetricsNode
 
 MetricsNode metricsNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
-BlindTiltNode blindTiltNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
+BlindTiltNode blindTiltNode(TD_BNODE_ID, TD_BNODE_TITLE, TD_BNODE_TYPE);
 
 bool TDbroadcastHandler(const String &level, const String &value)
 {
@@ -56,8 +60,8 @@ void setup()
   metricsNode.setMeasurementInterval(60);
   blindTiltNode.setMeasurementInterval(60);
 
-  Homie_setFirmware(SKN_MOD_NAME, SKN_MOD_VERSION);
-  Homie_setBrand(SKN_MOD_BRAND);
+  Homie_setFirmware(TD_MOD_NAME, TD_MOD_VERSION);
+  Homie_setBrand(TD_MOD_BRAND);
 
   Homie.setBroadcastHandler(TDbroadcastHandler)
       .setup();
