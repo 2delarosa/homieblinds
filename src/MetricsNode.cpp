@@ -9,7 +9,6 @@ MetricsNode::MetricsNode(const char *id, const char *name, const char *nType, co
 {
   _measurementInterval = (measurementInterval > MIN_INTERVAL) ? measurementInterval : MIN_INTERVAL;
   _lastMeasurement     = 0;
-
 }
 
 

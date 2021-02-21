@@ -11,7 +11,16 @@ BlindTiltNode::BlindTiltNode(const char *id, const char *name, const char *nType
   _lastMeasurement     = 0;
 
 }
+/**
+ * Handles the received MQTT messages from Homie.
+ *
+ */
+bool BlindTiltNode::handleInput(const HomieRange& range, const String& property, const String& value) {
 
+  Homie.getLogger() << cIndent << F("〽 handleInput -> property '") << property << F("' value=") << value << endl;
+
+  return true;
+}
 
 /**
     * Called by Homie when Homie.setup() is called; Once!
@@ -25,10 +34,21 @@ void BlindTiltNode::setup()
                     << F("90") // Replace with function lookup
                     << endl;
 
-  advertise(cPropertyTilt)
-      .setName(cPropertyTiltName)
-      .setDatatype(cPropertyTiltDataType)
-      .setUnit(cPropertyTiltFormat);
+  advertise(cPropertyLeft)
+      .setName(cPropertyLeftName)
+      .setDatatype(cPropertyLeftDataType)
+      .settable()
+      .setUnit(cPropertyLeftFormat);
+  advertise(cPropertyCenter)
+      .setName(cPropertyCenterName)
+      .setDatatype(cPropertyCenterDataType)
+      .settable()
+      .setUnit(cPropertyCenterFormat);
+  advertise(cPropertyRight)
+      .setName(cPropertyRightName)
+      .setDatatype(cPropertyRightDataType)
+      .settable()
+      .setUnit(cPropertyRightFormat);
 }
 
   /**
@@ -47,8 +67,14 @@ void BlindTiltNode::setup()
                         << F("90") // Replace with function lookup
                         << endl;
 
-      setProperty(cPropertyTilt)
+      setProperty(cPropertyLeft)
           .setRetained(true)
-          .send(WiFi.localIP().toString());
+          .send("UP");
+      setProperty(cPropertyCenter)
+          .setRetained(true)
+          .send("DOWN");
+      setProperty(cPropertyRight)
+          .setRetained(true)
+          .send("CENTER");
     }
   }

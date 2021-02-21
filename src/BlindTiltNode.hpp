@@ -22,6 +22,7 @@ public:
 protected : //Not accessible by main.cpp
   void setup() override;
   void loop() override;
+  virtual bool handleInput(const HomieRange& range, const String& property, const String& value);
   
 private:
 
@@ -34,9 +35,19 @@ private:
   const char* cCaption = "• Blind Tilt Position Node";
   const char* cIndent  = "  ◦ ";
 
-  const char *cPropertyTilt = "blind1";
-  const char *cPropertyTiltName = "pos";
-  const char *cPropertyTiltDataType = "integer";
-  const char *cPropertyTiltFormat = "degrees";
+  const char *cPropertyLeft = "windowLeft";
+  const char *cPropertyLeftName = "Left Window"; //Can use spaces
+  const char *cPropertyLeftDataType = "enum:UP,DOWN,CENTER";
+  const char *cPropertyLeftFormat = "%"; // Homie requires % instead of word percent
+  
+  const char *cPropertyCenter = "windowCenter";
+  const char *cPropertyCenterName = "Center Window"; //Can use spaces
+  const char *cPropertyCenterDataType = "enum:UP,DOWN,CENTER";
+  const char *cPropertyCenterFormat = "%"; // Homie requires % instead of word percent
+  
+  const char *cPropertyRight = "windowRight";
+  const char *cPropertyRightName = "Right Window"; //Can use spaces
+  const char *cPropertyRightDataType = "enum:UP,DOWN,CENTER";
+  const char *cPropertyRightFormat = "%"; // Homie requires % instead of word percent
   
 };

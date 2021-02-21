@@ -26,7 +26,7 @@ protected : //Not accessible by main.cpp
 private:
 
   // suggested rate is 1/60Hz (1m)
-  static const int MIN_INTERVAL         = 60;  // in seconds
+  static const int MIN_INTERVAL         = 30;  // in seconds
   static const int MEASUREMENT_INTERVAL = 60;
   unsigned long _measurementInterval;
   unsigned long _lastMeasurement;

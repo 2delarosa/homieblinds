@@ -33,14 +33,14 @@ extern "C"
 #define SKN_DNODE_TITLE "Device Info"
 #define SKN_DNODE_TYPE "sensor"
 
-#define TD_BNODE_ID "hardware"
-#define TD_BNODE_TITLE "Blind Tilt Control"
-#define TD_BNODE_TYPE "operations"
+#define TD_BNODE_ID "ThreeBlinds"
+#define TD_BNODE_TITLE "Blind Tilt Control" // 24 Character limitation
+#define TD_BNODE_TYPE "Rollershutter" // Here is where one to rename it for Rollershutter or Dimmer
 
 ADC_MODE(ADC_VCC); //vcc read in MetricsNode
 
-MetricsNode metricsNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE);
-BlindTiltNode blindTiltNode(TD_BNODE_ID, TD_BNODE_TITLE, TD_BNODE_TYPE);
+MetricsNode metricsNode(SKN_DNODE_ID, SKN_DNODE_TITLE, SKN_DNODE_TYPE, 60);
+BlindTiltNode blindTiltNode(TD_BNODE_ID, TD_BNODE_TITLE, TD_BNODE_TYPE, 60);
 
 bool TDbroadcastHandler(const String &level, const String &value)
 {
@@ -56,9 +56,6 @@ void setup()
     delay(100); // wait for external monitor to ready
 
   Serial << endl << "Starting..." << endl;
-
-  metricsNode.setMeasurementInterval(60);
-  blindTiltNode.setMeasurementInterval(60);
 
   Homie_setFirmware(TD_MOD_NAME, TD_MOD_VERSION);
   Homie_setBrand(TD_MOD_BRAND);
